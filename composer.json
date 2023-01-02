@@ -1,0 +1,12 @@
+{
+    "name" : "phippsytech/monologsnag",
+    "type" : "library",
+    "require": {
+        "monolog/monolog": "^3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "PhippsyTech\\MonoLogSnag\\": "src"
+        }
+    }
+}
