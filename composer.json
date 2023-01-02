@@ -1,5 +1,6 @@
 {
     "name" : "phippsytech/monologsnag",
+    "version": "1.0.0",
     "type" : "library",
     "require": {
         "monolog/monolog": "^3.2"
