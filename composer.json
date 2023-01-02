@@ -1,7 +1,21 @@
 {
     "name" : "phippsytech/monologsnag",
+    "description": "A handler for monolog that logs to LogSnag",
+    "keywords": ["log", "logging", "psr-3"],
+    "homepage": "https://github.com/phippsytech/monologsnag",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michael Phipps",
+            "email": "phippsy@phippsy.tech",
+            "homepage": "https://phippsy.tech"
+        }
+    ],
+
+
     "version": "1.0.0",
-    "type" : "library",
+    
     "require": {
         "monolog/monolog": "^3.2"
     },
