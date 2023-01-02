@@ -1,6 +1,11 @@
 # MonoLogSnag
 A handler for monolog that logs to LogSnag
 
+## Installation
+```
+composer require phippsytech/monologsnag
+```
+
 ## Example use
 
 ```php
