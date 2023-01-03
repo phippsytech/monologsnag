@@ -33,7 +33,7 @@ class Formatter extends JsonFormatter
 
         $recordData = parent::normalizeRecord($record);
 
-        $log_level = trim(strtolower($record->extra['level']));
+        $log_level = trim(strtolower($record->level->name));
         
         switch($log_level){
             case "debug":     $icon = "😶"; break;
