@@ -53,8 +53,11 @@ class Formatter extends JsonFormatter
             "event"=> $record->message,
             "icon"=>$icon,
             "notify"=>true,
-            "tags"=>$record->extra,
         ];
+
+        if(!empty($record->extra)){
+            $recordData["tags"]=$record->extra;
+        }
 
         $description ="";
 
