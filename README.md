@@ -10,9 +10,9 @@ To install MonoLogSnag, run the following command:
 composer require phippsytech/monologsnag
 ```
 
-## Usage
+## Initialising MonoLogSnag
 
-To use MonoLogSnag in your PHP code:
+To use MonoLogSnag with Monolog you need to initialise it like this:
 
 ```php
 use Monolog\Logger;
@@ -26,19 +26,65 @@ $channel = "test";
 $log = new Logger($channel);
 
 // Push the MonoLogSnagHandler to the log channel
-$log->pushHandler(new MonoLogSnagHandler($token, $project));
+$monoLogSnagHandler = new MonoLogSnagHandler($apiKey, $project);
+$log->pushHandler($monoLogSnagHandler);
+```
 
-// Use extra to send tags. LogSnag allows you to add up to 5 tags on a log entry.
+To make things easier to read, in all following code snippets I will refer to the above code with `// --> Initialise MonoLogSnag here <--` 
+
+## Basic Usage
+
+This will send a message with an empty description labeled "Hello World" to LogSnag
+
+```php
+// --> Initialise MonoLogSnag here <--
+
+// Send log to LogSnag
+$log->info('Hello World');
+
+```
+
+## Adding Description
+
+In Monolog you can add extra data in the logging context.  This is in the form of an array.
+
+MonoLogSnag converts the array into Markdown and sends it via the description:
+
+```php
+// --> Initialise MonoLogSnag here <--
+
+// Send log to LogSnag
+$log->info('A customer just placed an order', [
+    'Product' => "Happy Thoughts",
+    'Price' => 1.95
+]);
+```
+
+## Adding Tags
+
+LogSnag lets you include up to 5 tags on a log entry.  MonoLogSnag uses the `extra` part of a `$record` to hold these tags.  You can then filter on these tags in LogSnag.
+
+To add the tags we use the `pushProcessor()` to modify the `$record->extra` array.
+
+In the following example we are adding the log level as a tag named `level`
+
+```php
+// --> Initialise MonoLogSnag here <--
+
+// Add a tag called level that contains the current log level.
 $log->pushProcessor(function ($record) {
     $record->extra['level'] = $record->level->name; 
     return $record;
 });
 
-// Add records to the log
+// Send log to LogSnag.  This log is recording a page visit.
+$page = $_SERVER['REQUEST_URI'] ?? 'unknown';
 $log->info('Page Visit', [
     'page' => $_SERVER['REQUEST_URI']
 ]);
+
 ```
+
 
 ## Log Level Icons and Notifications
 
